@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	tokenbucket "github.com/Vishwa-Karthik/rate-limiter/token_bucket"
+	ipclientratelimit "github.com/Vishwa-Karthik/rate-limiter/ip-client-rate-limit"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,7 +13,9 @@ func main() {
 
 	port := ":8080"
 
-	router.Use(tokenbucket.RateLimiter())
+	// router.Use(tokenbucket.RateLimiter())
+
+	router.Use(ipclientratelimit.RateLimiter())
 
 	router.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": "Welcome to the Go server 🚀"})
